@@ -4,6 +4,7 @@
 
 char *inFile = "stdin";
 char *outFile = "stdout";
+int useStdIn = 1;
 int useStdOut = 1;
 int ignoreCase = 0;
 int numberOfWords = 0;
@@ -15,15 +16,25 @@ struct word{
 struct word word_array[2000];
 
 void readfile(){
-    FILE* file = fopen(inFile, "r");
-    char line[1024];
-    data[0] = '\0';
+    if(useStdIn == 0){
+        FILE* file = fopen(inFile, "r");
+        char line[1024];
+        data[0] = '\0';
 
-    while (fgets(line, sizeof(line), file) != NULL) {
-        strcat(data, line);
-    }
+        while (fgets(line, sizeof(line), file) != NULL) {
+            strcat(data, line);
+        }
 
     fclose(file);
+    }
+    else{
+        char line[1024];
+        data[0] = '\0';
+        printf("Please type your intput, press ctrl+z on a blank line when you're finished");
+        while (fgets(line, sizeof(line), stdin) != NULL) {
+            strcat(data, line);
+        }
+    }
 }
 
 void tokenise_analyse(){
@@ -95,6 +106,7 @@ int main(int argc, char **argv){
 
     for(int i = 0; i < argc; ++i){
         if(strcmp(argv[i], "-i") == 0){
+            useStdIn = 0;
             inFile = argv[i + 1];
         }
 
