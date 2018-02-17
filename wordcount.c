@@ -4,6 +4,7 @@
 
 char *inFile = "stdin";
 char *outFile = "stdout";
+int useStdOut = 1;
 int ignoreCase = 0;
 int numberOfWords = 0;
 char data[20000];
@@ -68,15 +69,14 @@ void tokenise_analyse(){
 }
 
 void printResult(){
-    if(strcmp(outFile, "stdout") != 0){
-        FILE *file;
-        fopen(outFile, "w");
-        fprintf(file, "\nData analysed, Results are as follows: \n");
-        fprintf(file, "Total word count: %d\n", numberOfWords);
+    if(useStdOut == 0){
+        FILE *file2 = fopen(outFile, "w");
+        fprintf(file2, "\nData analysed, Results are as follows: \n");
+        fprintf(file2, "Total word count: %d\n", numberOfWords);
         for(int count = 0; count < numberOfWords; count++){
-        fprintf(file, "%s: %d\n", word_array[count].name, word_array[count].count);
+        fprintf(file2, "%s: %d\n", word_array[count].name, word_array[count].count);
     }
-    fclose(file);
+    fclose(file2);
     }
     else{
         printf("\nData analysed, Results are as follows: \n");
@@ -99,6 +99,7 @@ int main(int argc, char **argv){
         }
 
         if(strcmp(argv[i], "-o") == 0){
+            useStdOut = 0;
             outFile = argv[i + 1];
         }
 
