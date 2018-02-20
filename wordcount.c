@@ -66,7 +66,7 @@ void tokenise_analyse(){
                 }
             }
         }
-        token = strtok(NULL, " ");
+        token = strtok(NULL, " ,.\n?\t");
 
     }
 
