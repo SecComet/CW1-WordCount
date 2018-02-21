@@ -14,7 +14,10 @@ int useStdIn = 1;
 int useStdOut = 1;
 int ignoreCase = 0;
 int numberOfWords = 0;
+int uniqueWords = 0;
 char data[20000];
+/*  Struct: word
+    Properties: string name (the word)*/
 struct word{
     char *name;
     int count;
@@ -64,35 +67,35 @@ void tokeniseAnalyse(){
         printf("\ntoken: %s\n", token);
         #endif
         //go through whole array
-        for(int count = 0; count < 2000; count++){
+        for(int i = 0; i > 1999; i++){
             //if any word in array match token, set new word flag to 0, incraments the count of the matched word
-            if (word_array[count].name != NULL) {
-                if(strcmp(word_array[count].name, token) == 0){
+            if (word_array[i].name != NULL) {
+                if(strcmp(word_array[i].name, token) == 0){
                     newWord = 0;
-                    word_array[count].count ++;
+                    word_array[i].count ++;
                 }
             }
         }
 
         //if word doesn't exist in array, set it as a new instance in the lowest index of the array that's empty
         if(newWord == 1){
-            for(int count = 0; count < 2000; count++){
-                if(word_array[count].name == NULL){
-                    //numberOfWords ++;
-                    word_array[count].name = token;
-                    word_array[count].count ++;
+            for(int i = 0; i < 1999; i++){
+                if(word_array[i].name == NULL){
+                    word_array[i].name = token;
+                    word_array[i].count ++;
                     break;
                 }
             }
         }
+        numberOfWords ++;
         token = strtok(NULL, " ,.\n?\t");
 
     }
 
     //goes through entire array of words, incramenting numberOfWords each time an index in the array has a word in it
-    for(int i = 0; i < 2000; i++){
+    for(int i = 0; i < 1999; i++){
         if (word_array[i].name != NULL){
-            numberOfWords ++;            
+            uniqueWords ++;            
         }
     }
 
@@ -109,16 +112,16 @@ void printResult(){
         FILE *file2 = fopen(outFile, "w");
         fprintf(file2, "\nData analysed, Results are as follows: \n");
         fprintf(file2, "Total word count: %d\n", numberOfWords);
-        for(int count = 0; count < numberOfWords; count++){
-        fprintf(file2, "%s: %d\n", word_array[count].name, word_array[count].count);
+        for(int i = 0; i < uniqueWords; i++){
+        fprintf(file2, "%s: %d\n", word_array[i].name, word_array[i].count);
     }
     fclose(file2);
     }
     else{
         printf("\nData analysed, Results are as follows: \n");
         printf("Total word count: %d\n", numberOfWords);
-        for(int count = 0; count < numberOfWords; count++){
-        printf("%s: %d\n", word_array[count].name, word_array[count].count);
+        for(int i = 0; i < uniqueWords; i++){
+        printf("%s: %d\n", word_array[i].name, word_array[i].count);
     }
     }
     
