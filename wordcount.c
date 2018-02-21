@@ -35,6 +35,7 @@ void readFile(){
         char line[1024];
         data[0] = '\0';
 
+        //adds the latest line to data whilst there's another line to get 
         while (fgets(line, sizeof(line), file) != NULL) {
             strcat(data, line);
         }
@@ -59,6 +60,7 @@ void readFile(){
     If it's not a new word, incraments the frequency of the matching word*/
 void tokeniseAnalyse(){
     char *token;
+    //get the first token
     token = strtok(data, " ,.\n?\t");
     int newWord = 1;
     while (token != NULL) {
