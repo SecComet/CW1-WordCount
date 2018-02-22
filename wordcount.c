@@ -77,7 +77,6 @@ void tokeniseAnalyse(){
 
         //if word doesn't exist in array, set it as a new instance in the lowest index of the array that's empty
         if(newWord == 1){
-            printf("test1\n");
 
             for(int count = 0; count < 2000; count++){
                 if(word_array[count].name == NULL){
@@ -108,7 +107,6 @@ void tokeniseAnalyse(){
     Returns: none
     Purpose: prints the results to the supplied output textfile, or to stdout if no textfile was supplied*/
 void printResult(){
-    printf("%d\n", uniqueWords);
     if(useStdOut == 0){
         //opens the supplied file in write mode, prints the results, then closes the file
         FILE *file2 = fopen(outFile, "w");
