@@ -16,8 +16,6 @@ int ignoreCase = 0;
 int numberOfWords = 0;
 int uniqueWords = 0;
 char data[20000];
-/*  Struct: word
-    Properties: string name (the word)*/
 struct word{
     char *name;
     int count;
@@ -35,7 +33,6 @@ void readFile(){
         char line[1024];
         data[0] = '\0';
 
-        //adds the latest line to data whilst there's another line to get 
         while (fgets(line, sizeof(line), file) != NULL) {
             strcat(data, line);
         }
@@ -60,7 +57,6 @@ void readFile(){
     If it's not a new word, incraments the frequency of the matching word*/
 void tokeniseAnalyse(){
     char *token;
-    //get the first token
     token = strtok(data, " ,.\n?\t");
     int newWord = 1;
     while (token != NULL) {
@@ -69,35 +65,38 @@ void tokeniseAnalyse(){
         printf("\ntoken: %s\n", token);
         #endif
         //go through whole array
-        for(int i = 0; i > 1999; i++){
+        for(int count = 0; count < 2000; count++){
             //if any word in array match token, set new word flag to 0, incraments the count of the matched word
-            if (word_array[i].name != NULL) {
-                if(strcmp(word_array[i].name, token) == 0){
+            if (word_array[count].name != NULL) {
+                if(strcmp(word_array[count].name, token) == 0){
                     newWord = 0;
-                    word_array[i].count ++;
+                    word_array[count].count ++;
                 }
             }
         }
 
         //if word doesn't exist in array, set it as a new instance in the lowest index of the array that's empty
         if(newWord == 1){
-            for(int i = 0; i < 1999; i++){
-                if(word_array[i].name == NULL){
-                    word_array[i].name = token;
-                    word_array[i].count ++;
+            printf("test1\n");
+
+            for(int count = 0; count < 2000; count++){
+                if(word_array[count].name == NULL){
+                    word_array[count].name = token;
+                    word_array[count].count ++;
                     break;
                 }
             }
+			uniqueWords++;
         }
-        numberOfWords ++;
         token = strtok(NULL, " ,.\n?\t");
-
+        numberOfWords ++;
+        newWord = 1;
     }
 
     //goes through entire array of words, incramenting numberOfWords each time an index in the array has a word in it
-    for(int i = 0; i < 1999; i++){
+    for(int i = 0; i < 2000; i++){
         if (word_array[i].name != NULL){
-            uniqueWords ++;            
+                      
         }
     }
 
@@ -109,21 +108,22 @@ void tokeniseAnalyse(){
     Returns: none
     Purpose: prints the results to the supplied output textfile, or to stdout if no textfile was supplied*/
 void printResult(){
+    printf("%d\n", uniqueWords);
     if(useStdOut == 0){
         //opens the supplied file in write mode, prints the results, then closes the file
         FILE *file2 = fopen(outFile, "w");
         fprintf(file2, "\nData analysed, Results are as follows: \n");
         fprintf(file2, "Total word count: %d\n", numberOfWords);
-        for(int i = 0; i < uniqueWords; i++){
-        fprintf(file2, "%s: %d\n", word_array[i].name, word_array[i].count);
+        for(int count = 0; count < uniqueWords; count++){
+        fprintf(file2, "%s: %d\n", word_array[count].name, word_array[count].count);
     }
     fclose(file2);
     }
     else{
         printf("\nData analysed, Results are as follows: \n");
         printf("Total word count: %d\n", numberOfWords);
-        for(int i = 0; i < uniqueWords; i++){
-        printf("%s: %d\n", word_array[i].name, word_array[i].count);
+        for(int count = 0; count < uniqueWords; count++){
+        printf("%s: %d\n", word_array[count].name, word_array[count].count);
     }
     }
     
@@ -155,7 +155,7 @@ int main(int argc, char **argv){
         }
     }
 
-    for(int i = 0; i < 1999; i++){
+    for(int i = 0; i < 2000; i++){
         word_array[i].name = NULL;
         word_array[i].count = 0;
     }
