@@ -57,6 +57,7 @@ void readFile(){
     If it's not a new word, incraments the frequency of the matching word*/
 void tokeniseAnalyse(){
     char *token;
+    //gets the first token
     token = strtok(data, " ,.\n?\t");
     int newWord = 1;
     while (token != NULL) {
@@ -77,7 +78,6 @@ void tokeniseAnalyse(){
 
         //if word doesn't exist in array, set it as a new instance in the lowest index of the array that's empty
         if(newWord == 1){
-
             for(int count = 0; count < 2000; count++){
                 if(word_array[count].name == NULL){
                     word_array[count].name = token;
@@ -91,15 +91,6 @@ void tokeniseAnalyse(){
         numberOfWords ++;
         newWord = 1;
     }
-
-    //goes through entire array of words, incramenting numberOfWords each time an index in the array has a word in it
-    for(int i = 0; i < 2000; i++){
-        if (word_array[i].name != NULL){
-                      
-        }
-    }
-
-
 }
 
 /*  Function: printResult
@@ -112,6 +103,7 @@ void printResult(){
         FILE *file2 = fopen(outFile, "w");
         fprintf(file2, "\nData analysed, Results are as follows: \n");
         fprintf(file2, "Total word count: %d\n", numberOfWords);
+        //prints as many record from the array as there are unique words
         for(int count = 0; count < uniqueWords; count++){
         fprintf(file2, "%s: %d\n", word_array[count].name, word_array[count].count);
     }
@@ -137,6 +129,7 @@ int main(int argc, char **argv){
     printf("Debug mode enabled, not for real use.\n");
     #endif
 
+    //searches the arguements for an input file, output file, or ignore case flag
     for(int i = 0; i < argc; ++i){
         if(strcmp(argv[i], "-i") == 0){
             useStdIn = 0;
@@ -153,11 +146,13 @@ int main(int argc, char **argv){
         }
     }
 
+    //ensures every record in the array is cleared
     for(int i = 0; i < 2000; i++){
         word_array[i].name = NULL;
         word_array[i].count = 0;
     }
 
+    //prints the status of the input file, output file, and ignore case flags
     printf("Input file: %s\n", inFile);
     printf("Output file: %s\n", outFile);
     printf("Ignore case: %d\n", ignoreCase);
@@ -177,5 +172,6 @@ int main(int argc, char **argv){
     tokeniseAnalyse();
     printResult();
 
+    //returns 0 to show the program ran successfully
     return 0;
 }
