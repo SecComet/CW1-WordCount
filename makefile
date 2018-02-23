@@ -1,7 +1,7 @@
 DebugMode:
 	cl /D DEBUG wordcount.c
 
-Deploy:
+wordcount:
 	cl wordcount.c
 
 clean:
