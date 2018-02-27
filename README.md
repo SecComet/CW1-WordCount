@@ -19,3 +19,7 @@ Wordcount reads in text, either from a text file or from standard input, counts 
 - If `-i` or `-o` are missing, the program will expect the text to come from the console, or will print to the console respectively
 - If you're inputting text using the console, you will need to use <kbd>ctrl</kbd>+<kbd>z</kbd> on a new line and then press <kbd>Enter</kbd> after your text input to indicate that your input has ended
 - Using `-c` will cause the program to ignore capitalised letters, so 'language' and 'Language' will both be treated as the same word.
+
+## Known Limitations
+- At present, the program cannot analyse more than 2000 words
+- A line may not be longer than 1024 characters
