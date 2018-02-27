@@ -15,6 +15,7 @@ int useStdOut = 1;
 int ignoreCase = 0;
 int numberOfWords = 0;
 int uniqueWords = 0;
+int maxWords = 2000;
 char data[20000];
 struct word{
     char *name;
@@ -66,7 +67,7 @@ void tokeniseAnalyse(){
         printf("\ntoken: %s\n", token);
         #endif
         //go through whole array
-        for(int count = 0; count < 2000; count++){
+        for(int count = 0; count < maxWords; count++){
             //if any word in array match token, set new word flag to 0, incraments the count of the matched word
             if (word_array[count].name != NULL) {
                 if(strcmp(word_array[count].name, token) == 0){
@@ -78,7 +79,7 @@ void tokeniseAnalyse(){
 
         //if word doesn't exist in array, set it as a new instance in the lowest index of the array that's empty
         if(newWord == 1){
-            for(int count = 0; count < 2000; count++){
+            for(int count = 0; count < maxWords; count++){
                 if(word_array[count].name == NULL){
                     word_array[count].name = token;
                     word_array[count].count ++;
@@ -147,7 +148,7 @@ int main(int argc, char **argv){
     }
 
     //ensures every record in the array is cleared
-    for(int i = 0; i < 2000; i++){
+    for(int i = 0; i < maxWords; i++){
         word_array[i].name = NULL;
         word_array[i].count = 0;
     }
