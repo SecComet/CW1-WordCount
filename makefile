@@ -9,6 +9,14 @@ clean:
 	del *.asm
 	del *.exe
 
-single words test, no ignore case:
+singleWords:
 	wordcount.exe -i single_words_test.txt
-	exit 0
+
+singleWordsCase:
+	wordcount.exe -i single_words_test.txt -c
+
+sentences:
+	wordcount.exe -i sentences_test.txt
+
+sentencesCase:
+	wordcount.exe -i sentences_test.txt -c
