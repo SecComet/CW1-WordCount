@@ -20,6 +20,18 @@ Wordcount reads in text, either from a text file or from standard input, counts 
 - If you're inputting text using the console, you will need to use <kbd>ctrl</kbd>+<kbd>z</kbd> on a new line and then press <kbd>Enter</kbd> after your text input to indicate that your input has ended
 - Using `-c` will cause the program to ignore capitalised letters, so 'language' and 'Language' will both be treated as the same word.
 
+## Makefile Commands
+
+At present, these are all the commands available through the makefile, they're all preceded by `nmake`
+- `clean` - removes the .exe and .obj files
+- `wordcount` - compiles the program, generating .exe and .obj files
+- `singleWords` - runs the program using single_words_test.txt as the input, outputs to console
+- `singleWordsCase` - runs the program using single_words_test.txt as the input, ignores letter case, outputs to console
+- `sentences` - runs the program using sentences_test.txt as the input, outputs to console
+- `sentencesCase` - runs the program using sentences_test.txt as the input, ignores letter case, outputs to console
+
 ## Known Limitations
+
 - At present, the program cannot analyse more than 2000 words
 - A line may not be longer than 1024 characters
+- the total number of characters in the input (including spaces) cannot be larger than 20000
